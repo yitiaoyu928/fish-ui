@@ -8,7 +8,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useSlots } from "vue"
 const props = defineProps<{
   prefixIcon: String
   suffixIcon: String
@@ -24,6 +23,12 @@ const props = defineProps<{
   @extend .cursor-pointer;
   .fish_button__wrapper {
     padding: 5px 10px;
+    .fish_button_prefix {
+    }
+    .fish_button_content {
+    }
+    .fish_button_suffix {
+    }
   }
 }
 </style>
