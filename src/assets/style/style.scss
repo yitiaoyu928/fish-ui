@@ -1,0 +1,20 @@
+// 字体设置
+$smallFontSize: 12px;
+$middleFontSize: 14px;
+$largeFontSize: 18px;
+// 基本颜色
+$lightGrey: #cccccc;
+// 圆角
+$smallBorderRadius: 2px;
+$middleBorderRadius: 5px;
+$largeBorderRadius: 8px;
+// flex布局
+
+$flex: "flex";
+.flex-base {
+  display: flex;
+}
+// 鼠标形状
+.cursor-pointer {
+  cursor: pointer;
+}
