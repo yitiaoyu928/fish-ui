@@ -2,7 +2,9 @@
   <div class="fish_button">
     <div class="fish_button__wrapper flex-base">
       <div class="fish_button_prefix" v-if="prefixIcon"></div>
-      <div class="fish_button_content"><slot></slot></div>
+      <div class="fish_button_content">
+        <slot></slot>
+      </div>
       <div class="fish_button_suffix" v-if="suffixIcon"></div>
     </div>
   </div>
