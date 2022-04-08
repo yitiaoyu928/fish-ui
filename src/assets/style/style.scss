@@ -1,20 +1,156 @@
 // 字体设置
 $smallFontSize: 12px;
 $middleFontSize: 14px;
+$normalFontSize: 16px;
 $largeFontSize: 18px;
 // 基本颜色
 $lightGrey: #cccccc;
+$lightBack: #333333;
+$lightWhite:#FFFAFA;
+$primaryColor:#009EFA;
+$dangerColor:#CD3F2C;
+$warningColor:#FFD343;
 // 圆角
 $smallBorderRadius: 2px;
 $middleBorderRadius: 4px;
 $largeBorderRadius: 8px;
-// flex布局
 
+@mixin commonTextColor {
+  color: $lightWhite;
+}
+
+@mixin bgColorMixin($type) {
+  @include commonTextColor();
+
+  @if $type=="default" {
+    color: $lightBack;
+    background-color: $lightWhite;
+  }
+
+  @if $type=="primary" {
+    background-color: $primaryColor;
+  }
+
+  @else if $type=="danger" {
+    background-color: $dangerColor;
+  }
+
+  @else if $type=="warning" {
+    background-color: $warningColor;
+  }
+}
+
+// 设置圆角大小
+@function getRounded($rounded) {
+  @if $rounded=="none" {
+    @return 0;
+  }
+
+  @else if $rounded=="small" {
+    @return $smallBorderRadius;
+  }
+
+  @else if $rounded=="middle" {
+    @return $middleBorderRadius;
+  }
+
+  @else if $rounded=="large" {
+    @return $largeBorderRadius;
+  }
+
+  @else if $rounded=="circle" {
+    @return 50%;
+  }
+}
+
+// 盒阴影
+@mixin box-shadow($color, $opacity) {
+  box-shadow: 3px 3px 5px rgba($color, $opacity);
+}
+
+// 背景色
+@mixin bg-color($color, $opacity) {
+  background-color: rgba($color, $opacity);
+}
+
+// 设置边框
+@mixin border($color) {
+  border: 1px solid $color;
+}
+
+@mixin setBorder($type) {
+  @if $type=="default" {
+    @include border($lightGrey);
+  }
+
+  @if $type=="primary" {
+    @include border($primaryColor);
+  }
+
+  @if $type=="danger" {
+    @include border($dangerColor);
+  }
+
+  @if $type=="warning" {
+    @include border($warningColor);
+  }
+}
+
+// 设置hover之后的盒阴影
+@mixin hoverBoxShadow($type) {
+
+  &:hover {
+    @if $type=="default" {
+      @include box-shadow($lightGrey, 30%);
+    }
+
+    @if $type=="primary" {
+      @include box-shadow($primaryColor, 30%);
+    }
+
+    @if $type=="danger" {
+      @include box-shadow($dangerColor, 30%);
+    }
+
+    @if $type=="warning" {
+      @include box-shadow($warningColor, 30%);
+    }
+  }
+
+}
+
+// 设置点击后的背景色
+@mixin activeBgColor($type) {
+
+  &:active {
+    @if $type=="default" {
+      @include bg-color(#000000, 10%);
+    }
+
+    @if $type=="primary" {
+      @include bg-color($primaryColor, 80%);
+    }
+
+    @if $type=="danger" {
+      @include bg-color($dangerColor, 80%);
+    }
+
+    @if $type=="warning" {
+      @include bg-color($warningColor, 80%);
+    }
+  }
+
+}
+
+// flex布局
 $flex: "flex";
+
 .flex-base {
   display: flex;
 }
+
 // 鼠标形状
 .cursor-pointer {
   cursor: pointer;
+  user-select: none;
 }

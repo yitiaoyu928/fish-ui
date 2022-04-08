@@ -13,6 +13,6 @@ export default defineConfig({
     alias: {
       "@": "src",
     },
-    extensions: [".js", ".json", ".css", ".ts", "..."],
+    extensions: [".js", ".json", ".css", ".ts",".vue", "..."],
   },
 })
