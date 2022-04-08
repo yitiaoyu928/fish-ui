@@ -19,24 +19,29 @@ $largeBorderRadius: 8px;
   color: $lightWhite;
 }
 
+// 背景色
+@mixin bg-color($color, $opacity) {
+  background-color: rgba($color, $opacity);
+}
+
 @mixin bgColorMixin($type) {
   @include commonTextColor();
 
   @if $type=="default" {
     color: $lightBack;
-    background-color: $lightWhite;
+    @include bg-color($lightWhite, 100%);
   }
 
   @if $type=="primary" {
-    background-color: $primaryColor;
+    @include bg-color($primaryColor, 100%);
   }
 
   @else if $type=="danger" {
-    background-color: $dangerColor;
+    @include bg-color($dangerColor, 100%);
   }
 
   @else if $type=="warning" {
-    background-color: $warningColor;
+    @include bg-color($warningColor, 100%);
   }
 }
 
@@ -68,10 +73,7 @@ $largeBorderRadius: 8px;
   box-shadow: 3px 3px 5px rgba($color, $opacity);
 }
 
-// 背景色
-@mixin bg-color($color, $opacity) {
-  background-color: rgba($color, $opacity);
-}
+
 
 // 设置边框
 @mixin border($color) {

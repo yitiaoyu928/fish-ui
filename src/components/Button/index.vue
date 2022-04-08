@@ -27,17 +27,22 @@ const props = withDefaults(defineProps<buttonInterface>(), {
 })
 // 定义点击事件
 const emits = defineEmits(["click"])
-const handleClick = function () {
-  emits("click")
+const handleClick = function (event: Event) {
+  emits("click", event)
 }
 
 </script>
 <style lang="scss" scoped>
 @import "../../assets/style/style.scss";
 .fish_button {
+  & + & {
+    margin-left: 10px;
+  }
   display: inline-block;
+  height: 30px;
   overflow: hidden;
   font-size: $middleFontSize;
+
   &.none-rounded {
     border-radius: getRounded("none");
   }
