@@ -151,8 +151,21 @@ $flex: "flex";
   display: flex;
 }
 
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
 // 鼠标形状
 .cursor-pointer {
   cursor: pointer;
   user-select: none;
+}
+
+// 禁用状态
+.disabled {
+  pointer-events: none;
 }

@@ -1,5 +1,9 @@
 <template>
-  <div :class="['fish_button', type, `${rounded}-rounded`]" @click="handleClick">
+  <div
+    :class="['fish_button', type, `${rounded}-rounded`, { 'disabled': disabled }]"
+    :disabled="disabled"
+    @click="handleClick"
+  >
     <div class="fish_button__wrapper flex-base">
       <div class="fish_button_prefix" v-if="prefixIcon">
         <i>{{ prefixIcon }}</i>
@@ -20,6 +24,7 @@ interface buttonInterface {
   suffixIcon?: string;
   type?: Types;
   rounded?: Rounded;
+  disabled?: boolean;
 }
 const props = withDefaults(defineProps<buttonInterface>(), {
   type: "default",
