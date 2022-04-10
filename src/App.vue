@@ -6,18 +6,17 @@
       <h3>按钮组件</h3>
       <div class="container-item">
         <h4>没有圆角</h4>
-        <f-button :disabled="disabled">hello</f-button>
-        {{ disabled }}
-        <f-button type="primary" :disabled="disabled">hello</f-button>
-        <f-button type="warning" :disabled="disabled">hello</f-button>
-        <f-button type="danger" :disabled="disabled">hello</f-button>
+        <f-button :disabled="disabled" @click="handleClick">hello</f-button>
+        <f-button type="primary" :disabled="disabled" @click="handleClick">hello</f-button>
+        <f-button type="warning" :disabled="disabled" @click="handleClick">hello</f-button>
+        <f-button type="danger" :disabled="disabled" @click="handleClick">hello</f-button>
       </div>
       <div class="container-item">
         <h4>小圆角</h4>
-        <f-button rounded="small">hello</f-button>
-        <f-button type="primary" rounded="small">hello</f-button>
-        <f-button type="warning" rounded="small">hello</f-button>
-        <f-button type="danger" rounded="small">hello</f-button>
+        <f-button rounded="small" @click="handleClick">hello</f-button>
+        <f-button type="primary" rounded="small" @click="handleClick">hello</f-button>
+        <f-button type="warning" rounded="small" @click="handleClick">hello</f-button>
+        <f-button type="danger" rounded="small" @click="handleClick">hello</f-button>
       </div>
       <div class="container-item">
         <h4>中号圆角</h4>
@@ -78,6 +77,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 let disabled = ref(true)
+function handleClick() {
+  console.log(123)
+}
 </script>
 <style lang="scss" scoped>
 .container + .container {

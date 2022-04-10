@@ -33,6 +33,9 @@ const props = withDefaults(defineProps<buttonInterface>(), {
 // 定义点击事件
 const emits = defineEmits(["click"])
 const handleClick = function (event: Event) {
+  if(props.disabled) {
+    return
+  }
   emits("click", event)
 }
 
@@ -40,13 +43,13 @@ const handleClick = function (event: Event) {
 <style lang="scss" scoped>
 @import "../../assets/style/style.scss";
 .fish_button {
-  & + & {
-    margin-left: 10px;
-  }
   display: inline-block;
   height: 30px;
   overflow: hidden;
   font-size: $middleFontSize;
+  & + & {
+    margin-left: 10px;
+  }
 
   &.none-rounded {
     border-radius: getRounded("none");
@@ -72,24 +75,36 @@ const handleClick = function (event: Event) {
     @include bgColorMixin("default");
     @include activeBgColor("default");
     @include hoverBoxShadow("default");
+    &.disabled {
+      @include disabled("default");
+    }
   }
   &.primary {
     @include setBorder("primary");
     @include bgColorMixin("primary");
     @include activeBgColor("primary");
     @include hoverBoxShadow("primary");
+    &.disabled {
+      @include disabled("primary");
+    }
   }
   &.danger {
     @include setBorder("danger");
     @include bgColorMixin("danger");
     @include activeBgColor("danger");
     @include hoverBoxShadow("danger");
+    &.disabled {
+      @include disabled("danger");
+    }
   }
   &.warning {
     @include setBorder("warning");
     @include bgColorMixin("warning");
     @include activeBgColor("warning");
     @include hoverBoxShadow("warning");
+    &.disabled {
+      @include disabled("warning");
+    }
   }
   @extend .cursor-pointer;
   .fish_button__wrapper {

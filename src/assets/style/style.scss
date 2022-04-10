@@ -166,6 +166,23 @@ $flex: "flex";
 }
 
 // 禁用状态
-.disabled {
-  pointer-events: none;
+@mixin disabled($type) {
+  // .disableded {
+    pointer-events: none;
+    @if $type=="default" {
+      @include bg-color($lightGrey, 30%);
+    }
+
+    @if $type=="primary" {
+      @include bg-color($primaryColor, 50%);
+    }
+
+    @if $type=="danger" {
+      @include bg-color($dangerColor, 50%);
+    }
+
+    @if $type=="warning" {
+      @include bg-color($warningColor, 50%);
+    }
+  // }
 }
