@@ -96,7 +96,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 let disabled = ref(true)
-let loading = ref(true)
+let loading = ref(false)
 function handleClick() {
   loading.value = true
   setTimeout(() => {
