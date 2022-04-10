@@ -25,14 +25,14 @@ interface buttonInterface {
   rounded?: Rounded;
   disabled?: boolean;
   loading?: boolean;
-  autoDisabled?: boolean;
+  closeDisabled?: boolean;
   loadingPosition?: LoadingPosition;
 }
 const props = withDefaults(defineProps<buttonInterface>(), {
   type: "default",
   rounded: "none",
   loading: false,
-  autoDisabled: true,
+  closeDisabled: false,
   loadingPosition: "left"
 })
 // 定义点击事件
@@ -43,6 +43,7 @@ const handleClick = function (event: Event) {
   }
   emits("click", event)
 }
+// 计算是否开启了loading并且loading位置为left,如果是，则返回.icon-loading
 let prefix = computed(() => {
   if (props.loading && props.loadingPosition === 'left') {
     return "icon-loading"
@@ -50,6 +51,7 @@ let prefix = computed(() => {
     return props.prefixIcon
   }
 })
+// 计算是否开启了loading并且loading位置为right,如果是，则返回.icon-loading
 let suffix = computed(() => {
   if (props.loading && props.loadingPosition === 'right') {
     return "icon-loading"
@@ -57,13 +59,17 @@ let suffix = computed(() => {
     return props.suffixIcon
   }
 })
+// 按照传入的props来决定是否开启disabled
 let isDisabled = computed(() => {
+  // 如果开启了disabled，则以disabled的状态来决定
   if (props.disabled) {
     return props.disabled
-  }
-  if (props.autoDisabled) {
-    if (props.loading) {
+  } else {
+    // 如果开启了closeDisabled，则看是否传入了loading，以loading的状态来决定是否禁止
+    if (!props.closeDisabled) {
       return props.loading
+    } else {
+      return false;
     }
   }
 })

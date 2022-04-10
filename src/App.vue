@@ -13,7 +13,7 @@
       </div>
       <div class="container-item">
         <h4>小圆角</h4>
-        <f-button rounded="small" @click="handleClick" :loading="loading" prefix-icon="icon-search"
+        <f-button rounded="small" @click="handleClick" :loading="loading" :close-disabled="true" prefix-icon="icon-search"
           suffix-icon="icon-search">hello</f-button>
         <f-button type="primary" rounded="small" @click="handleClick">hello</f-button>
         <f-button type="warning" rounded="small" @click="handleClick">hello</f-button>
