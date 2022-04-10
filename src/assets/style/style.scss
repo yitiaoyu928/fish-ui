@@ -150,6 +150,12 @@ $flex: "flex";
 .flex-base {
   display: flex;
 }
+.flex-direction-row {
+  flex-direction: row;
+}
+.flex-direction-column {
+  flex-direction: column;
+}
 
 .flex-align-center {
   align-items: center;
@@ -168,21 +174,39 @@ $flex: "flex";
 // 禁用状态
 @mixin disabled($type) {
   // .disableded {
-    pointer-events: none;
-    @if $type=="default" {
-      @include bg-color($lightGrey, 30%);
-    }
+  pointer-events: none;
 
-    @if $type=="primary" {
-      @include bg-color($primaryColor, 50%);
-    }
+  @if $type=="default" {
+    @include bg-color($lightGrey, 30%);
+  }
 
-    @if $type=="danger" {
-      @include bg-color($dangerColor, 50%);
-    }
+  @if $type=="primary" {
+    @include bg-color($primaryColor, 50%);
+  }
 
-    @if $type=="warning" {
-      @include bg-color($warningColor, 50%);
-    }
+  @if $type=="danger" {
+    @include bg-color($dangerColor, 50%);
+  }
+
+  @if $type=="warning" {
+    @include bg-color($warningColor, 50%);
+  }
+
   // }
+}
+
+// loading动画运动
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.fish__loading {
+  transform-origin: center center;
+  animation: loading linear infinite 1s;
+  height: 100%;
 }

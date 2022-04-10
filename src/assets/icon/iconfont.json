@@ -1,0 +1,23 @@
+{
+  "id": "3317002",
+  "name": "vue3-whell",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "vue3造轮子图标库",
+  "glyphs": [
+    {
+      "icon_id": "6598347",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e8ef",
+      "unicode_decimal": 59631
+    },
+    {
+      "icon_id": "2861028",
+      "name": "Loading",
+      "font_class": "loading",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    }
+  ]
+}
