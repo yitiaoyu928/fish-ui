@@ -56,8 +56,10 @@
         <h4>带有loading的圆形按钮</h4>
         <f-button rounded="circle" :loading="loading" @click="handleClick">环形按钮</f-button>
         <f-button type="primary" rounded="circle" :loading="loading" @click="handleClick">环形按钮</f-button>
-        <f-button type="warning" rounded="circle" :loading="loading" loading-position="right" @click="handleClick">环形按钮</f-button>
-        <f-button type="danger" rounded="circle" :loading="loading" loading-position="right" @click="handleClick">环形按钮</f-button>
+        <f-button type="warning" rounded="circle" :loading="loading" loading-position="right" @click="handleClick">环形按钮
+        </f-button>
+        <f-button type="danger" rounded="circle" :loading="loading" loading-position="right" @click="handleClick">环形按钮
+        </f-button>
       </div>
     </div>
     <!-- 输入框组件库 -->
@@ -72,10 +74,10 @@
       </div>
       <div class="container-item">
         <h4>小圆角输入框</h4>
-        <f-input rounded="small"></f-input>
-        <f-input type="primary" rounded="small"></f-input>
-        <f-input type="warning" rounded="small"></f-input>
-        <f-input type="danger" rounded="small"></f-input>
+        <f-input rounded="small" prefix-icon="icon-search" suffix-icon="123" open-icon-text="left"></f-input>
+        <f-input type="primary" rounded="small" prefix-icon="loading" suffix-icon="123" open-icon-text="right"></f-input>
+        <f-input type="warning" rounded="small" prefix-icon="icon-search" suffix-icon="123"></f-input>
+        <f-input type="danger" rounded="small" prefix-icon="icon-search" openIconText="left" suffix-icon="123"></f-input>
       </div>
       <div class="container-item">
         <h4>中等圆角输入框</h4>

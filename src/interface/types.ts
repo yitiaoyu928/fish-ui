@@ -5,4 +5,6 @@ export type LoadingPosition = "left" | "right";
 // 圆角类型
 export type Rounded = "small" | "middle" | "large" | "none" | "circle";
 // 输入框类型
-export type TextType= "text" | "textarea" | "radio" | "checkbox"
+export type TextType = "text" | "textarea" | "radio" | "checkbox";
+// 输入框是否展示Icon
+export type TextIconPosition = "left" | "right" | true | false;

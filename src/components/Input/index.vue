@@ -1,27 +1,38 @@
 <template>
   <div :class="['fish_input', type, `${rounded}-rounded`]">
-    <div :class="['fish__input__content', 'flex-base', 'flex-align-center']">
-      <div class="prefix-icon" v-if="prefixIcon">{{ prefixIcon }}</div>
+    <div
+      :class="['fish__input__content', 'flex-base', 'flex-align-center', 'flex-justify-center', { 'has-prefix-icon': prefixIcon }, { 'has-suffix-icon': suffixIcon }]">
+      <div class="prefix-icon" v-if="prefixIcon">
+        <i :class="['iconfont', prefixIcon]" v-if="iconTextPosition !== true || iconTextPosition === 'left'"></i>
+        <span v-else>{{ prefixIcon }}</span>
+      </div>
       <input :disabled="disabled" class="fish_real__input" @input="handleInput" @change="handleChange"
-        @focus="handleFocus" @blur="handleBlur" :type="textType" />
-      <div class="suffix-icon icon-font" v-if="suffixIcon">{{ suffixIcon }}</div>
+        @focus="handleFocus" @blur="handleBlur" :type="textType" :maxlength="maxLength" />
+      <div class="suffix-icon" v-if="suffixIcon">
+        <i :class="['iconfont', suffixIcon]" v-if="iconTextPosition !== true || iconTextPosition === 'right'"></i>
+        <span v-else>{{ suffixIcon }}</span>
+      </div>
     </div>  </div>
 </template>
 <script setup lang="ts">
-import { TextType, Types, Rounded } from "../../interface/types"
+import { computed } from "vue"
+import { TextType, Types, Rounded, TextIconPosition } from "../../interface/types"
 interface inputInterface {
   textType?: TextType;
   prefixIcon?: string;
   suffixIcon?: string;
+  openIconText?: TextIconPosition;
   type?: Types;
   rounded?: Rounded;
   modelValue?: any;
   disabled?: boolean;
+  maxLength?: number;
 };
 const props = withDefaults(defineProps<inputInterface>(), {
   textType: "text",
   type: "default",
-  rounded: "none"
+  rounded: "none",
+  openIconText: false
 })
 const emits = defineEmits(["update:modelValue"])
 type EventTarget = HTMLInputElement | HTMLTextAreaElement;
@@ -37,6 +48,21 @@ function handleBlur(event: Event) {
 function handleFocus(event: Event) {
   emits("update:modelValue", (event.target as EventTarget).value)
 }
+let iconTextPosition = computed(() => {
+  if (!props.openIconText) {
+    return true
+  } else {
+    if (props.openIconText === true) {
+      return true;
+    }
+    if (props.openIconText === 'left') {
+      return 'left'
+    }
+    if (props.openIconText === 'right') {
+      return 'right'
+    }
+  }
+})
 </script>
 <style lang="scss" scoped>@import "../../assets/style/style.scss";
 
@@ -47,10 +73,47 @@ function handleFocus(event: Event) {
     margin-left: 10px;
   }
 
+  .has-prefix-icon {
+    &.fish__input__content {
+      .prefix-icon {
+        border-top-left-radius: $middleBorderRadius;
+        border-bottom-left-radius: $middleBorderRadius;
+      }
+
+      .fish_real__input {
+        border-right: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+
+  }
+
+  .has-suffix-icon {
+    &.fish__input__content {
+      .suffix-icon {
+        border-top-right-radius: $middleBorderRadius;
+        border-bottom-right-radius: $middleBorderRadius;
+      }
+
+      .fish_real__input {
+        border-left: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+  }
+
   .prefix-icon,
   .suffix-icon {
-    width: 40px;
+    min-width: 40px;
+    line-height: 30px;
+    padding: 0 10px;
     overflow: hidden;
+    text-align: center;
+    height: 30px;
+    @include bg-color($inputIconBgColor, 50%);
   }
 
   .fish_real__input {
@@ -63,9 +126,23 @@ function handleFocus(event: Event) {
   &.default {
     .fish_real__input {
       @include setBorder("default");
+    }
 
-      &:focus {
-        @include box-shadow($lightGrey, 30%);
+    .fish__input__content {
+      background: #FFFFFF;
+
+      .prefix-icon,
+      .suffix-icon {
+        color: $lightWhite;
+        @include setBorder('default');
+      }
+
+      .prefix-icon {
+        border-right: none;
+      }
+
+      .suffix-icon {
+        border-left: none;
       }
     }
   }
@@ -74,9 +151,23 @@ function handleFocus(event: Event) {
     .fish_real__input {
       caret-color: $primaryColor;
       @include setBorder("primary");
+    }
 
-      &:focus {
-        @include box-shadow($primaryColor, 30%);
+    .fish__input__content {
+      background: #FFFFFF;
+
+      .prefix-icon,
+      .suffix-icon {
+        color: $lightWhite;
+        @include setBorder('primary');
+      }
+
+      .prefix-icon {
+        border-right: none;
+      }
+
+      .suffix-icon {
+        border-left: none;
       }
     }
   }
@@ -85,9 +176,23 @@ function handleFocus(event: Event) {
     .fish_real__input {
       caret-color: $dangerColor;
       @include setBorder("danger");
+    }
 
-      &:focus {
-        @include box-shadow($dangerColor, 30%);
+    .fish__input__content {
+      background: #FFFFFF;
+
+      .prefix-icon,
+      .suffix-icon {
+        color: $lightWhite;
+        @include setBorder('danger');
+      }
+
+      .prefix-icon {
+        border-right: none;
+      }
+
+      .suffix-icon {
+        border-left: none;
       }
     }
   }
@@ -96,9 +201,23 @@ function handleFocus(event: Event) {
     .fish_real__input {
       caret-color: $warningColor;
       @include setBorder("warning");
+    }
 
-      &:focus {
-        @include box-shadow($warningColor, 30%);
+    .fish__input__content {
+      background: #FFFFFF;
+
+      .prefix-icon,
+      .suffix-icon {
+        color: $lightWhite;
+        @include setBorder('warning');
+      }
+
+      .prefix-icon {
+        border-right: none;
+      }
+
+      .suffix-icon {
+        border-left: none;
       }
     }
   }
