@@ -68,7 +68,7 @@ let iconTextPosition = computed(() => {
 
 .fish_input {
   display: inline-block;
-
+  vertical-align: top;
   &+& {
     margin-left: 10px;
   }
