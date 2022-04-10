@@ -5,40 +5,59 @@
     <div class="container">
       <h3>按钮组件</h3>
       <div class="container-item">
-        <h4>没有圆角</h4>
-        <f-button :disabled="disabled" @click="handleClick">hello</f-button>
-        <f-button type="primary" :disabled="disabled" @click="handleClick">hello</f-button>
-        <f-button type="warning" :disabled="disabled" @click="handleClick">hello</f-button>
-        <f-button type="danger" :disabled="disabled" @click="handleClick">hello</f-button>
+        <h4>按钮的四种样式</h4>
+        <f-button>默认样式</f-button>
+        <f-button type="primary">主要样式</f-button>
+        <f-button type="warning">警告样式</f-button>
+        <f-button type="danger">危险样式</f-button>
       </div>
       <div class="container-item">
-        <h4>小圆角</h4>
-        <f-button rounded="small" @click="handleClick" :loading="loading" :close-disabled="true" prefix-icon="icon-search"
-          suffix-icon="icon-search">hello</f-button>
-        <f-button type="primary" rounded="small" @click="handleClick">hello</f-button>
-        <f-button type="warning" rounded="small" @click="handleClick">hello</f-button>
-        <f-button type="danger" rounded="small" @click="handleClick">hello</f-button>
+        <h4>带有左侧图标按钮</h4>
+        <f-button prefix-icon="icon-search">左侧图标</f-button>
+        <f-button type="primary" rounded="small" prefix-icon="icon-search">左侧图标
+        </f-button>
+        <f-button type="warning" rounded="middle" prefix-icon="icon-search">左侧图标
+        </f-button>
+        <f-button type="danger" rounded="large" prefix-icon="icon-search">左侧图标
+        </f-button>
       </div>
       <div class="container-item">
-        <h4>中号圆角</h4>
-        <f-button rounded="middle">hello</f-button>
-        <f-button type="primary" rounded="middle">hello</f-button>
-        <f-button type="warning" rounded="middle">hello</f-button>
-        <f-button type="danger" rounded="middle">hello</f-button>
+        <h4>带有左侧图标和loading按钮</h4>
+        <f-button prefix-icon="icon-search" :loading="loading" @click="handleClick">点一下我</f-button>
+        <f-button type="primary" rounded="small" prefix-icon="icon-search" :loading="loading" @click="handleClick">点一下我
+        </f-button>
+        <f-button type="warning" rounded="middle" prefix-icon="icon-search" :loading="loading" @click="handleClick">点一下我
+        </f-button>
+        <f-button type="danger" rounded="large" prefix-icon="icon-search" :loading="loading" @click="handleClick">点一下我
+        </f-button>
       </div>
       <div class="container-item">
-        <h4>大号圆角</h4>
-        <f-button rounded="large">hello</f-button>
-        <f-button type="primary" rounded="large">hello</f-button>
-        <f-button type="warning" rounded="large">hello</f-button>
-        <f-button type="danger" rounded="large">hello</f-button>
+        <h4>带有右侧图标的按钮</h4>
+        <f-button suffix-icon="icon-search">右侧图标</f-button>
+        <f-button type="primary" rounded="small" suffix-icon="icon-search">右侧图标</f-button>
+        <f-button type="warning" rounded="middle" suffix-icon="icon-search">右侧图标</f-button>
+        <f-button type="danger" rounded="large" suffix-icon="icon-search">右侧图标</f-button>
       </div>
       <div class="container-item">
-        <h4>圆形</h4>
-        <f-button rounded="circle">hello</f-button>
-        <f-button type="primary" rounded="circle" loading>hello</f-button>
-        <f-button type="warning" rounded="circle">hello</f-button>
-        <f-button type="danger" rounded="circle">hello</f-button>
+        <h4>带有右侧图标和loading的按钮</h4>
+        <f-button suffix-icon="icon-search" loading-position="right" :loading="loading" @click="handleClick">点我一下
+        </f-button>
+        <f-button type="primary" rounded="small" loading-position="right" suffix-icon="icon-search" :loading="loading"
+          @click="handleClick">点我一下
+        </f-button>
+        <f-button type="warning" rounded="middle" loading-position="right" suffix-icon="icon-search" :loading="loading"
+          @click="handleClick">点我一下
+        </f-button>
+        <f-button type="danger" rounded="large" loading-position="right" suffix-icon="icon-search" :loading="loading"
+          @click="handleClick">点我一下
+        </f-button>
+      </div>
+      <div class="container-item">
+        <h4>带有loading的圆形按钮</h4>
+        <f-button rounded="circle" :loading="loading" @click="handleClick">环形按钮</f-button>
+        <f-button type="primary" rounded="circle" :loading="loading" @click="handleClick">环形按钮</f-button>
+        <f-button type="warning" rounded="circle" :loading="loading" loading-position="right" @click="handleClick">环形按钮</f-button>
+        <f-button type="danger" rounded="circle" :loading="loading" loading-position="right" @click="handleClick">环形按钮</f-button>
       </div>
     </div>
     <!-- 输入框组件库 -->
@@ -77,7 +96,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 let disabled = ref(true)
-let loading = ref(false)
+let loading = ref(true)
 function handleClick() {
   loading.value = true
   setTimeout(() => {

@@ -145,14 +145,14 @@ $largeBorderRadius: 8px;
 }
 
 // flex布局
-$flex: "flex";
-
 .flex-base {
   display: flex;
 }
+
 .flex-direction-row {
   flex-direction: row;
 }
+
 .flex-direction-column {
   flex-direction: column;
 }
@@ -163,6 +163,19 @@ $flex: "flex";
 
 .flex-justify-center {
   justify-content: center;
+}
+
+// 定位
+.relative {
+  position: relative;
+}
+
+.absolute-center {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 // 鼠标形状
@@ -205,6 +218,7 @@ $flex: "flex";
     transform: rotate(360deg);
   }
 }
+
 .fish__loading {
   transform-origin: center center;
   animation: loading linear infinite 1s;

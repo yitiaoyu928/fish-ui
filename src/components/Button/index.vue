@@ -1,16 +1,16 @@
 <template>
-  <div :class="['fish_button', type, `${rounded}-rounded`, { 'disabled': isDisabled }]" :disabled="isDisabled"
-    @click="handleClick">
-    <div :class="['fish_button__wrapper', 'flex-base', isCircle]">
+  <div :class="['fish_button', type, `${rounded}-rounded`, { 'disabled': isDisabled }, { 'relative': isCircle }]"
+    :disabled="isDisabled" @click="handleClick">
+    <div :class="['fish_button__wrapper', { 'flex-base': rounded !== 'circle' }]">
       <div :class="['fish_button_prefix', { 'fish__loading': loading && loadingPosition === 'left' }]"
-        v-if="(prefixIcon || loading)">
+        v-if="(prefixIcon || loading) && loadingPosition === 'left'">
         <i :class="['iconfont', prefix]"></i>
       </div>
-      <div class="fish_button_content">
+      <div :class="['fish_button_content', { 'absolute-center': isCircle }]">
         <slot></slot>
       </div>
       <div :class="['fish_button_prefix', { 'fish__loading': loading && loadingPosition === 'right' }]"
-        v-if="(suffixIcon || loading)">
+        v-if="(suffixIcon || loading) && loadingPosition === 'right'">
         <i :class="['iconfont', suffix]"></i>
       </div>
     </div>  </div>
@@ -73,11 +73,9 @@ let isDisabled = computed(() => {
     }
   }
 })
-// 如果是环形，则将文字隐藏并显示loading
+// // 如果是环形，则将文字隐藏并显示loading
 let isCircle = computed(() => {
-  if (props.rounded === "circle" && props.loading) {
-    return "flex-direction-column"
-  }
+  return props.rounded === "circle"
 })
 </script>
 <style lang="scss" scoped>@import "../../assets/style/style.scss";
@@ -112,8 +110,9 @@ let isCircle = computed(() => {
     width: 60px;
     height: 60px;
     text-align: center;
-    line-height: 50px;
     border-radius: getRounded("circle");
+
+    &.fish_button_content {}
   }
 
   &.default {
