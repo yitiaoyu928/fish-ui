@@ -14,7 +14,8 @@
         v-if="suffixIcon || (loading && loadingPosition === 'right')">
         <i :class="['iconfont', suffix]"></i>
       </div>
-    </div>  </div>
+    </div>
+  </div>
 </template>
 <script setup lang="ts">
 import { computed } from "vue";
