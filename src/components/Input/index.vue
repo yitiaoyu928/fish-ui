@@ -135,8 +135,9 @@ let iconTextPosition = computed(() => {
 
       .fish__prefix__icon,
       .fish__suffix__icon {
-        color: $lightWhite;
+        color: $lightBack;
         @include setBorder('default');
+        @include bg-color($lightGrey, 60%);
       }
 
       .fish__prefix__icon {
@@ -162,6 +163,7 @@ let iconTextPosition = computed(() => {
       .fish__suffix__icon {
         color: $lightWhite;
         @include setBorder('primary');
+        @include bg-color($primaryColor, 80%);
       }
 
       .fish__prefix__icon {
@@ -187,6 +189,7 @@ let iconTextPosition = computed(() => {
       .fish__suffix__icon {
         color: $lightWhite;
         @include setBorder('danger');
+        @include bg-color($dangerColor, 80%);
       }
 
       .fish__prefix__icon {
@@ -212,6 +215,7 @@ let iconTextPosition = computed(() => {
       .fish__suffix__icon {
         color: $lightWhite;
         @include setBorder('warning');
+        @include bg-color($warningColor, 80%);
       }
 
       .fish__prefix__icon {

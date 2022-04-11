@@ -4,14 +4,14 @@
     :disabled="isDisabled" @click="handleClick">
     <div :class="['fish_button__wrapper', { 'fish__flex-base': rounded !== 'circle' }]">
       <div :class="['fish_button_prefix', { 'fish__loading': loading && loadingPosition === 'left' }]"
-        v-if="(prefixIcon || loading) && loadingPosition === 'left'">
+        v-if="prefixIcon || (loading && loadingPosition === 'left')">
         <i :class="['iconfont', prefix]"></i>
       </div>
       <div :class="['fish_button_content', { 'fish__absolute-center': isCircle }]">
         <slot></slot>
       </div>
       <div :class="['fish_button_prefix', { 'fish__loading': loading && loadingPosition === 'right' }]"
-        v-if="(suffixIcon || loading) && loadingPosition === 'right'">
+        v-if="suffixIcon || (loading && loadingPosition === 'right')">
         <i :class="['iconfont', suffix]"></i>
       </div>
     </div>  </div>
