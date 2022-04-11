@@ -1,6 +1,7 @@
 <template>
-  <div class="fish__switch" :style="{ backgroundColor: bgCalc, border: '1px solid ' + bgCalc }">
-    <div class="fish__switch__content fish__relative">
+  <div class="fish__switch" :style="{ backgroundColor: bgCalc, border: '1px solid ' + bgCalc }" @click="handleChange">
+    <div class="fish__switch__content fish__relative"
+      :class="{ 'fish__active': activeValue === value, 'fish__inactive': inActiveValue === value }">
       <span class="fish__switch__ball" :style="{ backgroundColor: dotColor }"></span>
     </div>  </div>
 </template>
@@ -15,6 +16,8 @@ interface SwitchProps {
   dotColor?: string;
 }
 const props = withDefaults(defineProps<SwitchProps>(), {
+  activeValue: true,
+  inActiveValue: false,
   inActiveColor: "#989898",
   activeColor: "#009EFA",
   dotColor: "#FFFFFF"
@@ -26,6 +29,15 @@ let bgCalc = computed(() => {
     return props.inActiveColor;
   }
 })
+const emits = defineEmits(['update:value'])
+function handleChange(event: Event) {
+  if (props.activeValue === props.value) {
+    emits("update:value", props.inActiveValue)
+  } else {
+    emits("update:value", props.activeValue)
+  }
+
+}
 </script>
 <style lang="scss">
 @import "../../assets/style/style.scss";
@@ -36,6 +48,7 @@ $width:60px;
   display: inline-block;
   overflow: hidden;
   border-radius: $height;
+  padding: 2px 0;
 
   &+& {
     margin-left: 10px;
@@ -52,9 +65,26 @@ $width:60px;
       width: 20px;
       height: 100%;
       border-radius: $height;
+      transition: all 250ms;
     }
 
-    &:hover {
+    &.fish__inactive {
+      &:active {
+        .fish__switch__ball {
+          width: 40px;
+        }
+
+      }
+    }
+
+    &.fish__active {
+      &:active {
+        .fish__switch__ball {
+          width: 40px;
+          left: calc(100% - 40px - 1px);
+        }
+      }
+
       .fish__switch__ball {
         left:calc(100% - #{$height} - 1px);
       }

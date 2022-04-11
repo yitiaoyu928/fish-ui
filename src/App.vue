@@ -99,7 +99,7 @@
     <!-- switch组件 -->
     <div class="container">
       <div class="container-item">
-        <f-switch></f-switch>
+        <f-switch v-model:value="switchValue"></f-switch>
         <f-switch></f-switch>
       </div>
       <div class="container-item"></div>
@@ -114,6 +114,10 @@ function handleClick() {
   setTimeout(() => {
     loading.value = false
   }, 3000)
+}
+let switchValue = ref(false)
+function handleSwitchChange(e: boolean) {
+  switchValue.value = e
 }
 </script>
 <style lang="scss" scoped>
