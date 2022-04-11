@@ -95,6 +95,14 @@
         <f-input type="warning" rounded="large"></f-input>
         <f-input type="danger" rounded="large"></f-input>
       </div>
+    </div>
+    <!-- switch组件 -->
+    <div class="container">
+      <div class="container-item">
+        <f-switch></f-switch>
+        <f-switch></f-switch>
+      </div>
+      <div class="container-item"></div>
     </div>  </div>
 </template>
 <script setup lang="ts">

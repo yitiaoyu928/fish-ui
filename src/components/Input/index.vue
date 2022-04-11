@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { TextType, Types, Rounded, TextIconPosition } from "../../interface/types"
-interface inputInterface {
+interface InputProps{
   textType?: TextType;
   prefixIcon?: string;
   suffixIcon?: string;
@@ -28,7 +28,7 @@ interface inputInterface {
   disabled?: boolean;
   maxLength?: number;
 };
-const props = withDefaults(defineProps<inputInterface>(), {
+const props = withDefaults(defineProps<InputProps>(), {
   textType: "text",
   type: "default",
   rounded: "none",

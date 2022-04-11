@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { Types, Rounded, LoadingPosition } from "../../interface/types"
-interface buttonInterface {
+interface ButtonProps {
   prefixIcon?: string;
   suffixIcon?: string;
   type?: Types;
@@ -29,7 +29,7 @@ interface buttonInterface {
   closeDisabled?: boolean;
   loadingPosition?: LoadingPosition;
 }
-const props = withDefaults(defineProps<buttonInterface>(), {
+const props = withDefaults(defineProps<ButtonProps>(), {
   type: "default",
   rounded: "none",
   loading: false,
