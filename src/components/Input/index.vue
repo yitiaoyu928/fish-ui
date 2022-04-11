@@ -1,12 +1,12 @@
 <template>
-  <div :class="['fish_input', type, `${rounded}-rounded`]">
+  <div :class="['fish__input', type, `${rounded}-rounded`]">
     <div
       :class="['fish__input__content', 'fish__flex-base', 'fish__flex-align-center', 'fish__flex-justify-center', { 'fish__has-prefix-icon': prefixIcon }, { 'fish__has-suffix-icon': suffixIcon }]">
       <div class="fish__prefix__icon" v-if="prefixIcon">
         <span v-if="iconTextPosition || iconTextPosition === 'left'">{{ prefixIcon }}</span>
         <i :class="['iconfont', prefixIcon]" v-else></i>
       </div>
-      <input :disabled="disabled" class="fish_real__input" @input="handleInput" @change="handleChange"
+      <input :disabled="disabled" class="fish__real__input" @input="handleInput" @change="handleChange"
         @focus="handleFocus" @blur="handleBlur" :type="textType" :maxlength="maxLength" />
       <div class="fish__suffix__icon" v-if="suffixIcon">
         <span v-if="iconTextPosition || iconTextPosition === 'right'">{{ suffixIcon }}</span>
@@ -67,7 +67,7 @@ let iconTextPosition = computed(() => {
 <style lang="scss">
 @import "../../assets/style/style.scss";
 
-.fish_input {
+.fish__input {
   display: inline-block;
   vertical-align: top;
 
@@ -82,7 +82,7 @@ let iconTextPosition = computed(() => {
         border-bottom-left-radius: $middleBorderRadius;
       }
 
-      .fish_real__input {
+      .fish__real__input {
         border-right: none;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
@@ -98,7 +98,7 @@ let iconTextPosition = computed(() => {
         border-bottom-right-radius: $middleBorderRadius;
       }
 
-      .fish_real__input {
+      .fish__real__input {
         border-left: none;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
@@ -118,7 +118,7 @@ let iconTextPosition = computed(() => {
     @include bg-color($inputIconBgColor, 50%);
   }
 
-  .fish_real__input {
+  .fish__real__input {
     height: 30px;
     padding: 0 8px;
     margin: 0;
@@ -126,7 +126,7 @@ let iconTextPosition = computed(() => {
   }
 
   &.default {
-    .fish_real__input {
+    .fish__real__input {
       @include setBorder("default");
     }
 
@@ -151,7 +151,7 @@ let iconTextPosition = computed(() => {
   }
 
   &.primary {
-    .fish_real__input {
+    .fish__real__input {
       caret-color: $primaryColor;
       @include setBorder("primary");
     }
@@ -177,7 +177,7 @@ let iconTextPosition = computed(() => {
   }
 
   &.danger {
-    .fish_real__input {
+    .fish__real__input {
       caret-color: $dangerColor;
       @include setBorder("danger");
     }
@@ -203,7 +203,7 @@ let iconTextPosition = computed(() => {
   }
 
   &.warning {
-    .fish_real__input {
+    .fish__real__input {
       caret-color: $warningColor;
       @include setBorder("warning");
     }
@@ -229,25 +229,25 @@ let iconTextPosition = computed(() => {
   }
 
   &.none-rounded {
-    .fish_real__input {
+    .fish__real__input {
       border-radius: getRounded("none");
     }
   }
 
   &.small-rounded {
-    .fish_real__input {
+    .fish__real__input {
       border-radius: getRounded("small");
     }
   }
 
   &.middle-rounded {
-    .fish_real__input {
+    .fish__real__input {
       border-radius: getRounded("middle");
     }
   }
 
   &.large-rounded {
-    .fish_real__input {
+    .fish__real__input {
       border-radius: getRounded("large");
     }
   }

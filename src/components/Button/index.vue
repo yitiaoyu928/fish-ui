@@ -1,16 +1,16 @@
 <template>
   <div
-    :class="['fish_button', `fish__${type}`, `fish__${rounded}-rounded`, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
+    :class="['fish__button', `fish__${type}`, `fish__${rounded}-rounded`, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
     :disabled="isDisabled" @click="handleClick">
-    <div :class="['fish_button__wrapper', { 'fish__flex-base': rounded !== 'circle' }]">
-      <div :class="['fish_button_prefix', { 'fish__loading': loading && loadingPosition === 'left' }]"
+    <div :class="['fish__button__wrapper', { 'fish__flex-base': rounded !== 'circle' }]">
+      <div :class="['fish__button_prefix', { 'fish__loading': loading && loadingPosition === 'left' }]"
         v-if="prefixIcon || (loading && loadingPosition === 'left')">
         <i :class="['iconfont', prefix]"></i>
       </div>
-      <div :class="['fish_button_content', { 'fish__absolute-center': isCircle }]">
+      <div :class="['fish__button_content', { 'fish__absolute-center': isCircle }]">
         <slot></slot>
       </div>
-      <div :class="['fish_button_prefix', { 'fish__loading': loading && loadingPosition === 'right' }]"
+      <div :class="['fish__button_prefix', { 'fish__loading': loading && loadingPosition === 'right' }]"
         v-if="suffixIcon || (loading && loadingPosition === 'right')">
         <i :class="['iconfont', suffix]"></i>
       </div>
@@ -82,7 +82,7 @@ let isCircle = computed(() => {
 <style lang="scss">
 @import "../../assets/style/style.scss";
 
-.fish_button {
+.fish__button {
   display: inline-block;
   height: 30px;
   overflow: hidden;
@@ -162,11 +162,11 @@ let isCircle = computed(() => {
 
   @extend .cursor-pointer;
 
-  .fish_button__wrapper {
+  .fish__button__wrapper {
     padding: 5px 10px;
 
-    .fish_button_prefix,
-    .fish_button_suffix {
+    .fish__button_prefix,
+    .fish__button_suffix {
       .iconfont {
         font-size: $middleFontSize;
       }
@@ -174,7 +174,7 @@ let isCircle = computed(() => {
       text-align: center;
     }
 
-    .fish_button_content {
+    .fish__button_content {
       flex: 1;
       font-size: $middleFontSize;
       padding: 0 5px;
