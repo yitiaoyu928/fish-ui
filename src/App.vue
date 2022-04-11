@@ -99,7 +99,7 @@
     <!-- switch组件 -->
     <div class="container">
       <div class="container-item">
-        <f-switch v-model:value="switchValue"></f-switch>
+        <f-switch v-model:value="switchValue" @change="handleSwitchChange"></f-switch>
         <f-switch></f-switch>
       </div>
       <div class="container-item"></div>
@@ -116,7 +116,7 @@ function handleClick() {
   }, 3000)
 }
 let switchValue = ref(false)
-function handleSwitchChange(e: boolean) {
+function handleSwitchChange(e: boolean): void {
   switchValue.value = e
 }
 </script>

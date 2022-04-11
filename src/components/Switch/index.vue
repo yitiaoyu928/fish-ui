@@ -8,11 +8,13 @@
 <script setup lang="ts">import { computed } from 'vue';
 
 interface SwitchProps {
-  value?: boolean;
+  value: number | boolean | string;
   activeValue?: number | boolean | string;
   inActiveValue?: number | boolean | string;
   activeColor?: string;
   inActiveColor?: string;
+  activeText?: string;
+  inActiveText?: string;
   dotColor?: string;
 }
 const props = withDefaults(defineProps<SwitchProps>(), {
@@ -29,14 +31,16 @@ let bgCalc = computed(() => {
     return props.inActiveColor;
   }
 })
-const emits = defineEmits(['update:value'])
+const emits = defineEmits(['update:value','change'])
 function handleChange(event: Event) {
   if (props.activeValue === props.value) {
     emits("update:value", props.inActiveValue)
+    emits("change", props.inActiveValue)
   } else {
     emits("update:value", props.activeValue)
+    emits("change", props.activeValue)
   }
-
+  
 }
 </script>
 <style lang="scss">
