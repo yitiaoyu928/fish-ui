@@ -99,8 +99,7 @@
     <!-- switch组件 -->
     <div class="container">
       <div class="container-item">
-        <f-switch v-model:value="switchValue" @change="handleSwitchChange"></f-switch>
-        <f-switch></f-switch>
+        <f-switch v-model:value="switchValue" @change="handleSwitchChange" active-text="开" in-active-text="关"></f-switch>
       </div>
       <div class="container-item"></div>
     </div>  </div>

@@ -2,7 +2,11 @@
   <div class="fish__switch" :style="{ backgroundColor: bgCalc, border: '1px solid ' + bgCalc }" @click="handleChange">
     <div class="fish__switch__content fish__relative"
       :class="{ 'fish__active': activeValue === value, 'fish__inactive': inActiveValue === value }">
+      <span class="fish__switch__left__text" :style="{ color: activeTextColor }"
+        v-if="activeText && activeValue === value">{{ activeText }}</span>
       <span class="fish__switch__ball" :style="{ backgroundColor: dotColor }"></span>
+      <span class="fish__switch__right__text" :style="{ color: inActiveTextColor }"
+        v-if="inActiveText && inActiveValue === value">{{ inActiveText }}</span>
     </div>  </div>
 </template>
 <script setup lang="ts">import { computed } from 'vue';
@@ -14,6 +18,8 @@ interface SwitchProps {
   activeColor?: string;
   inActiveColor?: string;
   activeText?: string;
+  activeTextColor?: string;
+  inActiveTextColor?: string;
   inActiveText?: string;
   dotColor?: string;
 }
@@ -22,6 +28,8 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   inActiveValue: false,
   inActiveColor: "#989898",
   activeColor: "#009EFA",
+  activeTextColor: "#FFFFFF",
+  inActiveTextColor: "#FFFFFF",
   dotColor: "#FFFFFF"
 })
 let bgCalc = computed(() => {
@@ -31,7 +39,7 @@ let bgCalc = computed(() => {
     return props.inActiveColor;
   }
 })
-const emits = defineEmits(['update:value','change'])
+const emits = defineEmits(['update:value', 'change'])
 function handleChange(event: Event) {
   if (props.activeValue === props.value) {
     emits("update:value", props.inActiveValue)
@@ -40,7 +48,7 @@ function handleChange(event: Event) {
     emits("update:value", props.activeValue)
     emits("change", props.activeValue)
   }
-  
+
 }
 </script>
 <style lang="scss">
@@ -62,6 +70,22 @@ $width:60px;
     width: $width;
     height: $height;
     line-height: $height;
+
+    .fish__switch__left__text,
+    .fish__switch__right__text {
+      font-size: $middleFontSize;
+      position: absolute;
+      cursor: default;
+      user-select: none;
+    }
+
+    .fish__switch__left__text {
+      left: 5px;
+    }
+
+    .fish__switch__right__text {
+      right: 5px;
+    }
 
     .fish__switch__ball {
       position: absolute;
