@@ -1,12 +1,13 @@
 <template>
-  <div :class="['fish_button', type, `${rounded}-rounded`, { 'disabled': isDisabled }, { 'relative': isCircle }]"
+  <div
+    :class="['fish_button', `fish__${type}`, `fish__${rounded}-rounded`, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
     :disabled="isDisabled" @click="handleClick">
-    <div :class="['fish_button__wrapper', { 'flex-base': rounded !== 'circle' }]">
+    <div :class="['fish_button__wrapper', { 'fish__flex-base': rounded !== 'circle' }]">
       <div :class="['fish_button_prefix', { 'fish__loading': loading && loadingPosition === 'left' }]"
         v-if="(prefixIcon || loading) && loadingPosition === 'left'">
         <i :class="['iconfont', prefix]"></i>
       </div>
-      <div :class="['fish_button_content', { 'absolute-center': isCircle }]">
+      <div :class="['fish_button_content', { 'fish__absolute-center': isCircle }]">
         <slot></slot>
       </div>
       <div :class="['fish_button_prefix', { 'fish__loading': loading && loadingPosition === 'right' }]"
@@ -78,7 +79,8 @@ let isCircle = computed(() => {
   return props.rounded === "circle"
 })
 </script>
-<style lang="scss" scoped>@import "../../assets/style/style.scss";
+<style lang="scss">
+@import "../../assets/style/style.scss";
 
 .fish_button {
   display: inline-block;
@@ -90,71 +92,70 @@ let isCircle = computed(() => {
     margin-left: 10px;
   }
 
-  &.none-rounded {
+  &.fish__none-rounded {
     border-radius: getRounded("none");
   }
 
-  &.small-rounded {
+  &.fish__small-rounded {
     border-radius: getRounded("small");
   }
 
-  &.middle-rounded {
+  &.fish__middle-rounded {
     border-radius: getRounded("middle");
   }
 
-  &.large-rounded {
+  &.fish__large-rounded {
     border-radius: getRounded("large");
   }
 
-  &.circle-rounded {
+  &.fish__circle-rounded {
     width: 60px;
     height: 60px;
     text-align: center;
     border-radius: getRounded("circle");
 
-    &.fish_button_content {}
   }
 
-  &.default {
+  &.fish__default {
     @include setBorder("default");
     @include bgColorMixin("default");
     @include activeBgColor("default");
     @include hoverBoxShadow("default");
 
-    &.disabled {
+    &.fish__disabled {
       @include disabled("default");
     }
   }
 
-  &.primary {
+  &.fish__primary {
     @include setBorder("primary");
     @include bgColorMixin("primary");
     @include activeBgColor("primary");
     @include hoverBoxShadow("primary");
 
-    &.disabled {
+    &.fish__disabled {
       @include disabled("primary");
     }
   }
 
-  &.danger {
+  &.fish__danger {
     @include setBorder("danger");
     @include bgColorMixin("danger");
     @include activeBgColor("danger");
     @include hoverBoxShadow("danger");
 
-    &.disabled {
+    &.fish__disabled {
       @include disabled("danger");
     }
   }
 
-  &.warning {
+  &.fish__warning {
     @include setBorder("warning");
     @include bgColorMixin("warning");
     @include activeBgColor("warning");
     @include hoverBoxShadow("warning");
 
-    &.disabled {
+    &.fish__disabled {
       @include disabled("warning");
     }
   }
@@ -178,9 +179,10 @@ let isCircle = computed(() => {
       font-size: $middleFontSize;
       padding: 0 5px;
 
-      &.default {
+      &.fish__default {
         color: $lightBack;
       }
     }
   }
-}</style>
+}
+</style>

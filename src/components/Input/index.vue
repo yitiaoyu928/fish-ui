@@ -1,14 +1,14 @@
 <template>
   <div :class="['fish_input', type, `${rounded}-rounded`]">
     <div
-      :class="['fish__input__content', 'flex-base', 'flex-align-center', 'flex-justify-center', { 'has-prefix-icon': prefixIcon }, { 'has-suffix-icon': suffixIcon }]">
-      <div class="prefix-icon" v-if="prefixIcon">
+      :class="['fish__input__content', 'fish__flex-base', 'fish__flex-align-center', 'fish__flex-justify-center', { 'fish__has-prefix-icon': prefixIcon }, { 'fish__has-suffix-icon': suffixIcon }]">
+      <div class="fish__prefix__icon" v-if="prefixIcon">
         <i :class="['iconfont', prefixIcon]" v-if="iconTextPosition !== true || iconTextPosition === 'left'"></i>
         <span v-else>{{ prefixIcon }}</span>
       </div>
       <input :disabled="disabled" class="fish_real__input" @input="handleInput" @change="handleChange"
         @focus="handleFocus" @blur="handleBlur" :type="textType" :maxlength="maxLength" />
-      <div class="suffix-icon" v-if="suffixIcon">
+      <div class="fish__suffix__icon" v-if="suffixIcon">
         <i :class="['iconfont', suffixIcon]" v-if="iconTextPosition !== true || iconTextPosition === 'right'"></i>
         <span v-else>{{ suffixIcon }}</span>
       </div>
@@ -64,7 +64,7 @@ let iconTextPosition = computed(() => {
   }
 })
 </script>
-<style lang="scss" scoped>@import "../../assets/style/style.scss";
+<style lang="scss">@import "../../assets/style/style.scss";
 
 .fish_input {
   display: inline-block;
@@ -73,9 +73,9 @@ let iconTextPosition = computed(() => {
     margin-left: 10px;
   }
 
-  .has-prefix-icon {
+  .fish__has-prefix-icon {
     &.fish__input__content {
-      .prefix-icon {
+      .fish__prefix__icon {
         border-top-left-radius: $middleBorderRadius;
         border-bottom-left-radius: $middleBorderRadius;
       }
@@ -89,9 +89,9 @@ let iconTextPosition = computed(() => {
 
   }
 
-  .has-suffix-icon {
+  .fish__has-suffix-icon {
     &.fish__input__content {
-      .suffix-icon {
+      .fish__suffix__icon {
         border-top-right-radius: $middleBorderRadius;
         border-bottom-right-radius: $middleBorderRadius;
       }
@@ -105,8 +105,8 @@ let iconTextPosition = computed(() => {
 
   }
 
-  .prefix-icon,
-  .suffix-icon {
+  .fish__prefix__icon,
+  .fish__suffix__icon {
     min-width: 40px;
     line-height: 30px;
     padding: 0 10px;
@@ -131,17 +131,17 @@ let iconTextPosition = computed(() => {
     .fish__input__content {
       background: #FFFFFF;
 
-      .prefix-icon,
-      .suffix-icon {
+      .fish__prefix__icon,
+      .fish__suffix__icon {
         color: $lightWhite;
         @include setBorder('default');
       }
 
-      .prefix-icon {
+      .fish__prefix__icon {
         border-right: none;
       }
 
-      .suffix-icon {
+      .fish__suffix__icon {
         border-left: none;
       }
     }
@@ -156,17 +156,17 @@ let iconTextPosition = computed(() => {
     .fish__input__content {
       background: #FFFFFF;
 
-      .prefix-icon,
-      .suffix-icon {
+      .fish__prefix__icon,
+      .fish__suffix__icon {
         color: $lightWhite;
         @include setBorder('primary');
       }
 
-      .prefix-icon {
+      .fish__prefix__icon {
         border-right: none;
       }
 
-      .suffix-icon {
+      .fish__suffix__icon {
         border-left: none;
       }
     }
@@ -181,17 +181,17 @@ let iconTextPosition = computed(() => {
     .fish__input__content {
       background: #FFFFFF;
 
-      .prefix-icon,
-      .suffix-icon {
+      .fish__prefix__icon,
+      .fish__suffix__icon {
         color: $lightWhite;
         @include setBorder('danger');
       }
 
-      .prefix-icon {
+      .fish__prefix__icon {
         border-right: none;
       }
 
-      .suffix-icon {
+      .fish__suffix__icon {
         border-left: none;
       }
     }
@@ -206,17 +206,17 @@ let iconTextPosition = computed(() => {
     .fish__input__content {
       background: #FFFFFF;
 
-      .prefix-icon,
-      .suffix-icon {
+      .fish__prefix__icon,
+      .fish__suffix__icon {
         color: $lightWhite;
         @include setBorder('warning');
       }
 
-      .prefix-icon {
+      .fish__prefix__icon {
         border-right: none;
       }
 
-      .suffix-icon {
+      .fish__suffix__icon {
         border-left: none;
       }
     }

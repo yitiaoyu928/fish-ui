@@ -146,32 +146,32 @@ $largeBorderRadius: 8px;
 }
 
 // flex布局
-.flex-base {
+.fish__flex-base {
   display: flex;
 }
 
-.flex-direction-row {
+.fish__flex-direction-row {
   flex-direction: row;
 }
 
-.flex-direction-column {
+.fish__flex-direction-column {
   flex-direction: column;
 }
 
-.flex-align-center {
+.fish__flex-align-center {
   align-items: center;
 }
 
-.flex-justify-center {
+.fish__flex-justify-center {
   justify-content: center;
 }
 
 // 定位
-.relative {
+.fish__relative {
   position: relative;
 }
 
-.absolute-center {
+.fish__absolute-center {
   width: 100%;
   position: absolute;
   top: 50%;
