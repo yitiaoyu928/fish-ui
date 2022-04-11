@@ -67,17 +67,19 @@
       <h3>输入框组件</h3>
       <div class="container-item">
         <h4>默认输入框</h4>
-        <f-input :disabled="disabled"></f-input>
-        <f-input type="primary" :disabled="disabled"></f-input>
-        <f-input type="warning" :disabled="disabled"></f-input>
-        <f-input type="danger" :disabled="disabled"></f-input>
+        <f-input></f-input>
+        <f-input type="primary"></f-input>
+        <f-input type="warning"></f-input>
+        <f-input type="danger"></f-input>
       </div>
       <div class="container-item">
         <h4>小圆角输入框</h4>
-        <f-input rounded="small" prefix-icon="icon-search" suffix-icon="123" open-icon-text="left"></f-input>
-        <f-input type="primary" rounded="small" prefix-icon="loading" suffix-icon="123" open-icon-text="right"></f-input>
+        <f-input rounded="small" prefix-icon="icon-search" suffix-icon="123" open-icon-text="right"></f-input>
+        <f-input type="primary" rounded="small" prefix-icon="loading" suffix-icon="123" :open-icon-text="true">
+        </f-input>
         <f-input type="warning" rounded="small" prefix-icon="icon-search" suffix-icon="123"></f-input>
-        <f-input type="danger" rounded="small" prefix-icon="icon-search" openIconText="left" suffix-icon="123"></f-input>
+        <f-input type="danger" rounded="small" prefix-icon="icon-search" open-icon-text="left" suffix-icon="123">
+        </f-input>
       </div>
       <div class="container-item">
         <h4>中等圆角输入框</h4>
@@ -106,7 +108,8 @@ function handleClick() {
   }, 3000)
 }
 </script>
-<style lang="scss" scoped>.container+.container {
+<style lang="scss" scoped>
+.container+.container {
   margin-bottom: 20px;
 }
 
@@ -116,4 +119,5 @@ function handleClick() {
 
 .container-item+.container-item {
   margin-bottom: 20px;
-}</style>
+}
+</style>

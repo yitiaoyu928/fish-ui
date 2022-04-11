@@ -3,14 +3,14 @@
     <div
       :class="['fish__input__content', 'fish__flex-base', 'fish__flex-align-center', 'fish__flex-justify-center', { 'fish__has-prefix-icon': prefixIcon }, { 'fish__has-suffix-icon': suffixIcon }]">
       <div class="fish__prefix__icon" v-if="prefixIcon">
-        <i :class="['iconfont', prefixIcon]" v-if="iconTextPosition !== true || iconTextPosition === 'left'"></i>
-        <span v-else>{{ prefixIcon }}</span>
+        <span v-if="iconTextPosition || iconTextPosition === 'left'">{{ prefixIcon }}</span>
+        <i :class="['iconfont', prefixIcon]" v-else></i>
       </div>
       <input :disabled="disabled" class="fish_real__input" @input="handleInput" @change="handleChange"
         @focus="handleFocus" @blur="handleBlur" :type="textType" :maxlength="maxLength" />
       <div class="fish__suffix__icon" v-if="suffixIcon">
-        <i :class="['iconfont', suffixIcon]" v-if="iconTextPosition !== true || iconTextPosition === 'right'"></i>
-        <span v-else>{{ suffixIcon }}</span>
+        <span v-if="iconTextPosition || iconTextPosition === 'right'">{{ suffixIcon }}</span>
+        <i :class="['iconfont', suffixIcon]" v-else></i>
       </div>
     </div>  </div>
 </template>
@@ -50,7 +50,7 @@ function handleFocus(event: Event) {
 }
 let iconTextPosition = computed(() => {
   if (!props.openIconText) {
-    return true
+    return false
   } else {
     if (props.openIconText === true) {
       return true;
@@ -64,11 +64,13 @@ let iconTextPosition = computed(() => {
   }
 })
 </script>
-<style lang="scss">@import "../../assets/style/style.scss";
+<style lang="scss">
+@import "../../assets/style/style.scss";
 
 .fish_input {
   display: inline-block;
   vertical-align: top;
+
   &+& {
     margin-left: 10px;
   }
@@ -245,4 +247,5 @@ let iconTextPosition = computed(() => {
       border-radius: getRounded("large");
     }
   }
-}</style>
+}
+</style>
