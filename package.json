@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vitest":"vitest run"
   },
   "dependencies": {
     "vue": "^3.2.25"
@@ -14,6 +15,7 @@
     "sass": "^1.49.0",
     "typescript": "^4.4.4",
     "vite": "^2.7.2",
+    "vitest": "^0.23.4",
     "vue-tsc": "^0.29.8"
   }
 }

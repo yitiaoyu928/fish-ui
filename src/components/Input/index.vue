@@ -2,39 +2,37 @@
   <div :class="['fish__input', type, `${rounded}-rounded`]">
     <div
       :class="['fish__input__content', 'fish__flex-base', 'fish__flex-align-center', 'fish__flex-justify-center', { 'fish__has-prefix-icon': prefixIcon }, { 'fish__has-suffix-icon': suffixIcon }]">
-      <div class="fish__prefix__icon" v-if="prefixIcon">
-        <span v-if="iconTextPosition || iconTextPosition === 'left'">{{ prefixIcon }}</span>
-        <i :class="['iconfont', prefixIcon]" v-else></i>
+      <div class="fish__prefix__icon" v-if="prefixIcon" @click="handleLeftClick">
+        <i :class="['iconfont', prefixIcon]"></i>
       </div>
       <input :disabled="disabled" class="fish__real__input" @input="handleInput" @change="handleChange"
-        @focus="handleFocus" @blur="handleBlur" :type="textType" :maxlength="maxLength" />
-      <div class="fish__suffix__icon" v-if="suffixIcon">
-        <span v-if="iconTextPosition || iconTextPosition === 'right'">{{ suffixIcon }}</span>
-        <i :class="['iconfont', suffixIcon]" v-else></i>
+        @focus="handleFocus" @blur="handleBlur" :value="modelValue" :type="textType" :maxlength="maxLength" />
+      <div class="fish__suffix__icon" v-if="suffixIcon" @click="handleRightClick" v-loading="loading">
+        <i :class="['iconfont', suffixIcon]"></i>
       </div>
-    </div>  </div>
+    </div>
+  </div>
 </template>
 <script setup lang="ts">
-import { computed } from "vue"
-import { TextType, Types, Rounded, TextIconPosition } from "../../interface/types"
-interface InputProps{
+import { TextType, Types, Rounded } from "../../interface/types"
+interface InputProps {
   textType?: TextType;
   prefixIcon?: string;
   suffixIcon?: string;
-  openIconText?: TextIconPosition;
   type?: Types;
   rounded?: Rounded;
   modelValue?: any;
   disabled?: boolean;
   maxLength?: number;
+  loading?: boolean
 };
 const props = withDefaults(defineProps<InputProps>(), {
   textType: "text",
   type: "default",
   rounded: "none",
-  openIconText: false
+  loading: false
 })
-const emits = defineEmits(["update:modelValue"])
+const emits = defineEmits(["update:modelValue", "leftClick", "rightClick"])
 type EventTarget = HTMLInputElement | HTMLTextAreaElement;
 function handleInput(event: Event) {
   emits("update:modelValue", (event.target as EventTarget).value)
@@ -48,21 +46,12 @@ function handleBlur(event: Event) {
 function handleFocus(event: Event) {
   emits("update:modelValue", (event.target as EventTarget).value)
 }
-let iconTextPosition = computed(() => {
-  if (!props.openIconText) {
-    return false
-  } else {
-    if (props.openIconText === true) {
-      return true;
-    }
-    if (props.openIconText === 'left') {
-      return 'left'
-    }
-    if (props.openIconText === 'right') {
-      return 'right'
-    }
-  }
-})
+function handleLeftClick(event: Event) {
+  emits("leftClick")
+}
+function handleRightClick(event: Event) {
+  emits("rightClick")
+}
 </script>
 <style lang="scss">
 @import "../../assets/style/style.scss";
@@ -83,7 +72,7 @@ let iconTextPosition = computed(() => {
       }
 
       .fish__real__input {
-        border-right: none;
+        border-left: none;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }
@@ -99,7 +88,7 @@ let iconTextPosition = computed(() => {
       }
 
       .fish__real__input {
-        border-left: none;
+        border-right: none;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
@@ -115,6 +104,7 @@ let iconTextPosition = computed(() => {
     overflow: hidden;
     text-align: center;
     height: 30px;
+    @extend .cursor-pointer;
     @include bg-color($inputIconBgColor, 50%);
   }
 

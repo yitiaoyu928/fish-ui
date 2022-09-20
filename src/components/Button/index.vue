@@ -3,14 +3,14 @@
     :class="['fish__button', `fish__${type}`, `fish__${rounded}-rounded`, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
     :disabled="isDisabled" @click="handleClick">
     <div :class="['fish__button__wrapper', { 'fish__flex-base': rounded !== 'circle' }]">
-      <div :class="['fish__button_prefix', { 'fish__loading': loading && loadingPosition === 'left' }]"
+      <div :class="['fish__button_prefix', { 'fish__loading_animation': loading && loadingPosition === 'left' }]"
         v-if="prefixIcon || (loading && loadingPosition === 'left')">
         <i :class="['iconfont', prefix]"></i>
       </div>
       <div :class="['fish__button_content', { 'fish__absolute-center': isCircle }]">
         <slot></slot>
       </div>
-      <div :class="['fish__button_prefix', { 'fish__loading': loading && loadingPosition === 'right' }]"
+      <div :class="['fish__button_prefix', { 'fish__loading_animation': loading && loadingPosition === 'right' }]"
         v-if="suffixIcon || (loading && loadingPosition === 'right')">
         <i :class="['iconfont', suffix]"></i>
       </div>
@@ -41,7 +41,10 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 const emits = defineEmits(["click"])
 const handleClick = function (event: Event) {
   if (props.disabled) {
-    return
+    return true
+  }
+  if (props.loading) {
+    return true
   }
   emits("click", event)
 }
