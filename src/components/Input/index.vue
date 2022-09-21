@@ -14,8 +14,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineConfig } from "rollup";
-import { defineComponent } from "vue";
 import { TextType, Types, Rounded } from "../../interface/types"
 interface InputProps {
   textType?: TextType;
@@ -52,7 +50,7 @@ function handleLeftClick(event: Event) {
   emits("leftClick")
 }
 function handleRightClick(event: Event) {
-  console.log(321)
+  console.log(event)
   emits("rightClick")
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['fish__button', `fish__${type}`, `fish__${rounded}-rounded`, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
+    :class="['fish__button', `fish__${type}`, `fish__${rounded}-rounded`,{'fish__plain':plain}, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
     :disabled="isDisabled" @click="handleClick">
     <div :class="['fish__button__wrapper', { 'fish__flex-base': rounded !== 'circle' }]">
       <div :class="['fish__button_prefix', { 'fish__loading_animation': loading && loadingPosition === 'left' }]"
@@ -28,6 +28,7 @@ interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   closeDisabled?: boolean;
+  plain?: boolean;
   loadingPosition?: LoadingPosition;
 }
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -35,6 +36,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   rounded: "none",
   loading: false,
   closeDisabled: false,
+  plain: false,
   loadingPosition: "left"
 })
 // 定义点击事件
@@ -91,7 +93,7 @@ let isCircle = computed(() => {
   height: 30px;
   overflow: hidden;
   font-size: $middleFontSize;
-
+  transition: all .2s ease;
   &+& {
     margin-left: 10px;
   }
@@ -125,7 +127,18 @@ let isCircle = computed(() => {
     @include bgColorMixin("default");
     @include activeBgColor("default");
     @include hoverBoxShadow("default");
-
+    &.fish__plain {
+      background-color: transparent;
+      color: $lightBack;
+      &:hover {
+        @include bgColorMixin("default");
+        color: $lightBack;
+      }
+      &:active {
+        color: $lightBack;
+        background-color: transparent;
+      }
+    }
     &.fish__disabled {
       @include disabled("default");
     }
@@ -136,7 +149,18 @@ let isCircle = computed(() => {
     @include bgColorMixin("primary");
     @include activeBgColor("primary");
     @include hoverBoxShadow("primary");
-
+    &.fish__plain {
+      background-color: transparent;
+      color: $primaryColor;
+      &:hover {
+        @include bgColorMixin("primary");
+        color: $lightWhite;
+      }
+      &:active {
+        color: $primaryColor;
+        background-color: transparent;
+      }
+    }
     &.fish__disabled {
       @include disabled("primary");
     }
@@ -147,7 +171,18 @@ let isCircle = computed(() => {
     @include bgColorMixin("danger");
     @include activeBgColor("danger");
     @include hoverBoxShadow("danger");
-
+    &.fish__plain {
+      background-color: transparent;
+      color: $dangerColor;
+      &:hover {
+        @include bgColorMixin("danger");
+        color: $lightWhite;
+      }
+      &:active {
+        color: $dangerColor;
+        background-color: transparent;
+      }
+    }
     &.fish__disabled {
       @include disabled("danger");
     }
@@ -158,7 +193,18 @@ let isCircle = computed(() => {
     @include bgColorMixin("warning");
     @include activeBgColor("warning");
     @include hoverBoxShadow("warning");
-
+    &.fish__plain {
+      background-color: transparent;
+      color: $warningColor;
+      &:hover {
+        @include bgColorMixin("warning");
+        color: $lightWhite;
+      }
+      &:active {
+        color: $warningColor;
+        background-color: transparent;
+      }
+    }
     &.fish__disabled {
       @include disabled("warning");
     }

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['fish__button', `fish__${type}`, `fish__${rounded}-rounded`, { 'fish__disabled': isDisabled }]">
+  <div :class="['fish__tag', `fish__${type}`, `fish__${rounded}-rounded`, { 'fish__disabled': isDisabled }]">
     <slot></slot>
   </div>
 
@@ -18,4 +18,19 @@ const props = withDefaults(defineProps<TagInterface>(), {
 })
 </script>
 <style lang="scss" scoped>
+  @import "../../assets/style/style.scss";
+.fish__tag {
+  display: inline-block;
+  padding: 5px 10px;
+  .fish__primary {
+
+  }
+  .fish__danger {
+    
+  }
+  .fish__warning {
+    
+  }
+
+}
 </style>

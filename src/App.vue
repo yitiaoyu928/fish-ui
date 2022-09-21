@@ -4,8 +4,13 @@
     <!-- 输入框组件库 -->
     <div class="container">
       <div class="container-item">
-        <f-input type="danger" rounded="small" suffix-icon="icon-search" :loading="loading" @rightClick="handleClick">
-        </f-input>
+        <f-tag>hello</f-tag>
+      </div>
+      <div class="container-item">
+        <f-button type="primary" plain>hello</f-button>
+        <f-button type="default" plain>hello</f-button>
+        <f-button type="warning" plain>hello</f-button>
+        <f-button type="danger" plain>hello</f-button>
       </div>
     </div>
   </div>
@@ -22,6 +27,7 @@ function handleClick() {
 }
 let switchValue = ref(false)
 function handleSwitchChange(e: boolean): void {
+  console.log(e)
   switchValue.value = e
 }
 </script>

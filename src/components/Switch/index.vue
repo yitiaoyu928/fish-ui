@@ -1,15 +1,19 @@
 <template>
-  <div class="fish__switch" :style="{ backgroundColor: bgCalc, border: '1px solid ' + bgCalc }" @click="handleChange">
+  <div class="fish__switch" :class="[{'fish__rounded':rounded}]"
+    :style="{ backgroundColor: bgCalc, border: '1px solid ' + bgCalc }" @click="handleChange">
     <div class="fish__switch__content fish__relative"
       :class="{ 'fish__active': activeValue === value, 'fish__inactive': inActiveValue === value }">
       <span class="fish__switch__left__text" :style="{ color: activeTextColor }"
         v-if="activeText && activeValue === value">{{ activeText }}</span>
-      <span class="fish__switch__ball" :style="{ backgroundColor: dotColor }"></span>
+      <span class="fish__switch__ball" :class="[{'fish__ball_rounded':rounded}]"
+        :style="{ backgroundColor: dotColor }"></span>
       <span class="fish__switch__right__text" :style="{ color: inActiveTextColor }"
         v-if="inActiveText && inActiveValue === value">{{ inActiveText }}</span>
-    </div>  </div>
+    </div>
+  </div>
 </template>
-<script setup lang="ts">import { computed } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
 
 interface SwitchProps {
   value: number | boolean | string;
@@ -22,6 +26,7 @@ interface SwitchProps {
   inActiveTextColor?: string;
   inActiveText?: string;
   dotColor?: string;
+  rounded?: boolean
 }
 const props = withDefaults(defineProps<SwitchProps>(), {
   activeValue: true,
@@ -30,8 +35,10 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   activeColor: "#009EFA",
   activeTextColor: "#FFFFFF",
   inActiveTextColor: "#FFFFFF",
-  dotColor: "#FFFFFF"
+  dotColor: "#FFFFFF",
+  rounded: false
 })
+// 计算背景颜色
 let bgCalc = computed(() => {
   if (props.value === props.activeValue) {
     return props.activeColor
@@ -53,17 +60,21 @@ function handleChange(event: Event) {
 </script>
 <style lang="scss">
 @import "../../assets/style/style.scss";
-$height:20px;
-$width:60px;
+$height: 20px;
+$width: 60px;
 
 .fish__switch {
   display: inline-block;
   overflow: hidden;
-  border-radius: $height;
+  border-radius: 5px;
   padding: 2px 0;
 
   &+& {
     margin-left: 10px;
+  }
+
+  &.fish__rounded {
+    border-radius: $height;
   }
 
   .fish__switch__content {
@@ -92,7 +103,12 @@ $width:60px;
       left: 1px;
       width: 20px;
       height: 100%;
-      border-radius: $height;
+      border-radius: 5px;
+
+      &.fish__ball_rounded {
+        border-radius: $height;
+      }
+
       transition: all 250ms;
     }
 
