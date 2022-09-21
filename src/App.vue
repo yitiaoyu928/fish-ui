@@ -14,6 +14,7 @@
 import { ref } from 'vue';
 let loading = ref(false)
 function handleClick() {
+  console.log(123)
   loading.value = true
   setTimeout(() => {
     loading.value = false

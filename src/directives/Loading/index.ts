@@ -31,6 +31,10 @@ const Loading: ObjectDirective = {
       let loadingElement = Dom.createDOM({ tag: "i", style: { color: "#333333" }, className: ["iconfont icon-loading"] })
       rollBox.appendChild(loadingElement)
       resultElement.appendChild(rollBox)
+      resultElement.addEventListener("click",(e)=>{
+        e.preventDefault()
+        return false
+      })
       el.appendChild(resultElement)
     } else {
       el.removeChild(resultElement as HTMLElement)

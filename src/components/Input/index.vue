@@ -2,18 +2,20 @@
   <div :class="['fish__input', type, `${rounded}-rounded`]">
     <div
       :class="['fish__input__content', 'fish__flex-base', 'fish__flex-align-center', 'fish__flex-justify-center', { 'fish__has-prefix-icon': prefixIcon }, { 'fish__has-suffix-icon': suffixIcon }]">
-      <div class="fish__prefix__icon" v-if="prefixIcon" @click="handleLeftClick">
+      <div class="fish__prefix__icon" v-if="prefixIcon" @click.stop="handleLeftClick">
         <i :class="['iconfont', prefixIcon]"></i>
       </div>
       <input :disabled="disabled" class="fish__real__input" @input="handleInput" @change="handleChange"
         @focus="handleFocus" @blur="handleBlur" :value="modelValue" :type="textType" :maxlength="maxLength" />
-      <div class="fish__suffix__icon" v-if="suffixIcon" @click="handleRightClick" v-loading="loading">
+      <div class="fish__suffix__icon" v-if="suffixIcon" @click.stop="handleRightClick" v-loading="loading">
         <i :class="['iconfont', suffixIcon]"></i>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { defineConfig } from "rollup";
+import { defineComponent } from "vue";
 import { TextType, Types, Rounded } from "../../interface/types"
 interface InputProps {
   textType?: TextType;
@@ -50,6 +52,7 @@ function handleLeftClick(event: Event) {
   emits("leftClick")
 }
 function handleRightClick(event: Event) {
+  console.log(321)
   emits("rightClick")
 }
 </script>
