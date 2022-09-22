@@ -8,3 +8,5 @@ export type Rounded = "small" | "middle" | "large" | "none" | "circle";
 export type TextType = "text" | "textarea" | "radio" | "checkbox";
 // 输入框是否展示Icon
 export type TextIconPosition = "left" | "right" | true | false;
+// 大小
+export type Size = "small" | "medium" | "large"

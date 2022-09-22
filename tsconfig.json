@@ -11,8 +11,13 @@
     "esModuleInterop": true,
     "lib": [
       "esnext",
-      "dom"
+      "dom",
+      "ES2015",
+      "ES2021",
+      "DOM",
+      "DOM.Iterable"
     ],
+    "types":["vitest/globals"],
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -24,6 +29,7 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src/**/*.test.ts"
   ]
 }

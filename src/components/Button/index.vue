@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['fish__button', `fish__${type}`, `fish__${rounded}-rounded`,{'fish__plain':plain}, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
+    :class="['fish__button', `fish__${type}`, `size__${size}`,`fish__${rounded}-rounded`,{'fish__plain':plain}, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
     :disabled="isDisabled" @click="handleClick">
     <div :class="['fish__button__wrapper', { 'fish__flex-base': rounded !== 'circle' }]">
       <div :class="['fish__button_prefix', { 'fish__loading_animation': loading && loadingPosition === 'left' }]"
@@ -10,7 +10,7 @@
       <div :class="['fish__button_content', { 'fish__absolute-center': isCircle }]">
         <slot></slot>
       </div>
-      <div :class="['fish__button_prefix', { 'fish__loading_animation': loading && loadingPosition === 'right' }]"
+      <div :class="['fish__button_suffix', { 'fish__loading_animation': loading && loadingPosition === 'right' }]"
         v-if="suffixIcon || (loading && loadingPosition === 'right')">
         <i :class="['iconfont', suffix]"></i>
       </div>
@@ -19,11 +19,12 @@
 </template>
 <script setup lang="ts">
 import { computed } from "vue";
-import { Types, Rounded, LoadingPosition } from "../../interface/types"
+import { Types, Rounded, LoadingPosition, Size } from "../../interface/types"
 interface ButtonProps {
   prefixIcon?: string;
   suffixIcon?: string;
   type?: Types;
+  size?: Size;
   rounded?: Rounded;
   disabled?: boolean;
   loading?: boolean;
@@ -35,6 +36,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   type: "default",
   rounded: "none",
   loading: false,
+  size: "small",
   closeDisabled: false,
   plain: false,
   loadingPosition: "left"
@@ -90,10 +92,46 @@ let isCircle = computed(() => {
 
 .fish__button {
   display: inline-block;
-  height: 30px;
   overflow: hidden;
-  font-size: $middleFontSize;
   transition: all .2s ease;
+
+  &.size__small {
+    height: $smallHeight;
+
+    // .fish__button__wrapper {
+    //   padding: 5px 10px;
+
+    //   .fish__button_prefix,
+    //   .fish__button_suffix {
+    //     .iconfont {
+    //       font-size: $smallFontSize;
+    //     }
+
+    //     text-align: center;
+    //   }
+
+    //   .fish__button_content {
+    //     flex: 1;
+    //     font-size: $smallFontSize;
+    //     padding: 0 5px;
+
+    //     &.fish__default {
+    //       color: $lightBack;
+    //     }
+    //   }
+    // }
+  }
+
+  &.size__medium {
+    font-size: $middleFontSize;
+    height: $mediumHeight;
+  }
+
+  &.size__large {
+    font-size: $largeFontSize;
+    height: $largeHeight;
+  }
+
   &+& {
     margin-left: 10px;
   }
@@ -127,18 +165,22 @@ let isCircle = computed(() => {
     @include bgColorMixin("default");
     @include activeBgColor("default");
     @include hoverBoxShadow("default");
+
     &.fish__plain {
       background-color: transparent;
       color: $lightBack;
+
       &:hover {
         @include bgColorMixin("default");
         color: $lightBack;
       }
+
       &:active {
         color: $lightBack;
         background-color: transparent;
       }
     }
+
     &.fish__disabled {
       @include disabled("default");
     }
@@ -149,18 +191,22 @@ let isCircle = computed(() => {
     @include bgColorMixin("primary");
     @include activeBgColor("primary");
     @include hoverBoxShadow("primary");
+
     &.fish__plain {
       background-color: transparent;
       color: $primaryColor;
+
       &:hover {
         @include bgColorMixin("primary");
         color: $lightWhite;
       }
+
       &:active {
         color: $primaryColor;
         background-color: transparent;
       }
     }
+
     &.fish__disabled {
       @include disabled("primary");
     }
@@ -171,18 +217,22 @@ let isCircle = computed(() => {
     @include bgColorMixin("danger");
     @include activeBgColor("danger");
     @include hoverBoxShadow("danger");
+
     &.fish__plain {
       background-color: transparent;
       color: $dangerColor;
+
       &:hover {
         @include bgColorMixin("danger");
         color: $lightWhite;
       }
+
       &:active {
         color: $dangerColor;
         background-color: transparent;
       }
     }
+
     &.fish__disabled {
       @include disabled("danger");
     }
@@ -193,18 +243,22 @@ let isCircle = computed(() => {
     @include bgColorMixin("warning");
     @include activeBgColor("warning");
     @include hoverBoxShadow("warning");
+
     &.fish__plain {
       background-color: transparent;
       color: $warningColor;
+
       &:hover {
         @include bgColorMixin("warning");
         color: $lightWhite;
       }
+
       &:active {
         color: $warningColor;
         background-color: transparent;
       }
     }
+
     &.fish__disabled {
       @include disabled("warning");
     }
