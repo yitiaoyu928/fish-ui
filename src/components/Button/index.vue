@@ -1,5 +1,7 @@
 <template>
-  <div :class="['fish__button', `fish__${type}`, `size__${size}`,`fish__${rounded}-rounded`,{'fish__plain':plain}, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]" disabled="isDisabled" @click="handleClick">
+  <div
+    :class="['fish__button', `fish__${type}`, `size__${size}`,`fish__${rounded}-rounded`,{'fish__plain':plain}, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
+    :disabled="isDisabled" @click="handleClick">
     <div :class="['fish__button__wrapper', { 'fish__flex-base': rounded !== 'circle' }]">
       <div :class="['fish__button_prefix', { 'fish__loading_animation': loading && loadingPosition === 'left' }]"
         v-if="prefixIcon || (loading && loadingPosition === 'left')">
