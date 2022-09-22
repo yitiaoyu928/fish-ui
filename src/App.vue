@@ -4,7 +4,7 @@
     <!-- 输入框组件库 -->
     <div class="container">
       <div class="container-item">
-        <f-tag>hello</f-tag>
+        <f-tag>hello321321321</f-tag>
       </div>
       <div class="container-item">
         <f-button type="primary" size="medium" plain>hello</f-button>
