@@ -7,8 +7,7 @@
         <f-tag>hello</f-tag>
       </div>
       <div class="container-item">
-        <f-button type="primary" size="medium" plain>hello</f-button>
-        <f-button type="default" plain>hello</f-button>
+        <f-button type="primary" size="medium" plain>hello</f-button><f-button type="default" plain>hello</f-button>
         <f-button type="warning" plain>hello</f-button>
         <f-button type="danger" plain>hello</f-button>
       </div>
