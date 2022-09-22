@@ -3,9 +3,9 @@
   "singleQuote": true,
   "bracketSameLine": true,
   "bracketSpacing": true,
-  "insert_final_newline": true,
-  "end_of_line": "lf",
-  "indent_style": "space",
-  "indent_size": 2,
-  "max_line_length": 80
+  "semi": true,
+  "printWidth": 80,
+  "vueIndentScriptAndStyle": false,
+  "arrowParens": "always",
+  "htmlWhitespaceSensitivity": "ignore"
 }
