@@ -4,7 +4,7 @@
     <!-- 输入框组件库 -->
     <div class="container">
       <div class="container-item">
-        <f-tag>hello321321321</f-tag>
+        <f-tag>hello</f-tag>
       </div>
       <div class="container-item">
         <f-button type="primary" size="medium" plain>hello</f-button>
@@ -19,7 +19,6 @@
 import { ref } from 'vue';
 let loading = ref(false);
 function handleClick() {
-  console.log(123);
   loading.value = true;
   setTimeout(() => {
     loading.value = false;
