@@ -20,7 +20,7 @@ const config:UserConfig = {
     },
     questions: {
       type: {
-        description: `支持一下选项${JSON.stringify([
+        description: `支持以下选项${JSON.stringify([
           "build", // 打包项修改
           "ci", // 配置文件修改
           "docs", // 文档修改
