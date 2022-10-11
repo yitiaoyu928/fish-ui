@@ -8,7 +8,7 @@
       </div>
       <div class="container-item">
         <f-button type="primary" size="medium" plain>hello</f-button>
-        <f-button type="default" plain>hello</f-button>
+        <f-button type="default" plain>hell12312321o</f-button>
         <f-button type="warning" plain>hello</f-button>
         <f-button type="danger" plain>hello</f-button>
       </div>
