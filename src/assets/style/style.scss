@@ -154,7 +154,9 @@ $largeBorderRadius: 8px;
 .fish__flex-base {
   display: flex;
 }
-
+.fish__inline-flex {
+  display: inline-flex;
+}
 .fish__flex-direction-row {
   flex-direction: row;
 }

@@ -1,16 +1,45 @@
 <template>
   <div
-    :class="['fish__button', `fish__${type}`, `size__${size}`,`fish__${rounded}-rounded`,{'fish__plain':plain}, { 'fish__disabled': isDisabled }, { 'fish__relative': isCircle }]"
-    :disabled="isDisabled" @click="handleClick">
-    <div :class="['fish__button__wrapper', { 'fish__flex-base': rounded !== 'circle' }]">
-      <div :class="['fish__button_prefix', { 'fish__loading_animation': loading && loadingPosition === 'left' }]"
+    :class="[
+      'fish__inline-flex',
+      'fish__flex-align-center',
+      'fish__button',
+      `size__${size}`,
+      `fish__${type}`,
+      `fish__${rounded}-rounded`,
+      { fish__plain: plain },
+      { fish__disabled: isDisabled },
+      { fish__relative: isCircle },
+    ]"
+    :disabled="isDisabled"
+    @click="handleClick">
+    <div
+      :class="[
+        'fish__button__wrapper',
+        {
+          'fish__flex-base': rounded !== 'circle',
+        },
+      ]">
+      <div
+        :class="[
+          'fish__button_prefix',
+          { fish__loading_animation: loading && loadingPosition === 'left' },
+        ]"
         v-if="prefixIcon || (loading && loadingPosition === 'left')">
         <i :class="['iconfont', prefix]"></i>
       </div>
-      <div :class="['fish__button_content', { 'fish__absolute-center': isCircle }]">
+      <div
+        :class="[
+          'fish__button_content',
+          { 'fish__absolute-center': isCircle },
+        ]">
         <slot></slot>
       </div>
-      <div :class="['fish__button_suffix', { 'fish__loading_animation': loading && loadingPosition === 'right' }]"
+      <div
+        :class="[
+          'fish__button_suffix',
+          { fish__loading_animation: loading && loadingPosition === 'right' },
+        ]"
         v-if="suffixIcon || (loading && loadingPosition === 'right')">
         <i :class="['iconfont', suffix]"></i>
       </div>
@@ -18,8 +47,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
-import { Types, Rounded, LoadingPosition, Size } from "../../interface/types"
+import { computed } from 'vue';
+import { Types, Rounded, LoadingPosition, Size } from '../../interface/types';
 interface ButtonProps {
   prefixIcon?: string;
   suffixIcon?: string;
@@ -33,68 +62,67 @@ interface ButtonProps {
   loadingPosition?: LoadingPosition;
 }
 const props = withDefaults(defineProps<ButtonProps>(), {
-  type: "default",
-  rounded: "none",
+  type: 'default',
+  rounded: 'none',
   loading: false,
-  size: "small",
+  size: 'small',
   closeDisabled: false,
   plain: false,
-  loadingPosition: "left"
-})
+  loadingPosition: 'left',
+});
 // 定义点击事件
-const emits = defineEmits(["click"])
+const emits = defineEmits(['click']);
 const handleClick = function (event: Event) {
   if (props.disabled) {
-    return true
+    return true;
   }
   if (props.loading) {
-    return true
+    return true;
   }
-  emits("click", event)
-}
+  emits('click', event);
+};
 // 计算是否开启了loading并且loading位置为left,如果是，则返回.icon-loading
 let prefix = computed(() => {
   if (props.loading && props.loadingPosition === 'left') {
-    return "icon-loading"
+    return 'icon-loading';
   } else {
-    return props.prefixIcon
+    return props.prefixIcon;
   }
-})
+});
 // 计算是否开启了loading并且loading位置为right,如果是，则返回.icon-loading
 let suffix = computed(() => {
   if (props.loading && props.loadingPosition === 'right') {
-    return "icon-loading"
+    return 'icon-loading';
   } else {
-    return props.suffixIcon
+    return props.suffixIcon;
   }
-})
+});
 // 按照传入的props来决定是否开启disabled
 let isDisabled = computed(() => {
   // 如果开启了disabled，则以disabled的状态来决定
   if (props.disabled) {
-    return props.disabled
+    return props.disabled;
   } else {
     // 如果开启了closeDisabled，则看是否传入了loading，以loading的状态来决定是否禁止
     if (!props.closeDisabled) {
-      return props.loading
+      return props.loading;
     } else {
       return false;
     }
   }
-})
+});
 // // 如果是环形，则将文字隐藏并显示loading
 let isCircle = computed(() => {
-  return props.rounded === "circle"
-})
+  return props.rounded === 'circle';
+});
 </script>
 <style lang="scss">
-@import "../../assets/style/style.scss";
+@import '../../assets/style/style.scss';
 
 .fish__button {
   display: inline-block;
   overflow: hidden;
-  transition: all .2s ease;
-
+  transition: all 0.2s ease;
   &.size__small {
     height: $smallHeight;
 
@@ -132,46 +160,45 @@ let isCircle = computed(() => {
     height: $largeHeight;
   }
 
-  &+& {
+  & + & {
     margin-left: 10px;
   }
 
   &.fish__none-rounded {
-    border-radius: getRounded("none");
+    border-radius: getRounded('none');
   }
 
   &.fish__small-rounded {
-    border-radius: getRounded("small");
+    border-radius: getRounded('small');
   }
 
   &.fish__middle-rounded {
-    border-radius: getRounded("middle");
+    border-radius: getRounded('middle');
   }
 
   &.fish__large-rounded {
-    border-radius: getRounded("large");
+    border-radius: getRounded('large');
   }
 
   &.fish__circle-rounded {
     width: 60px;
     height: 60px;
     text-align: center;
-    border-radius: getRounded("circle");
-
+    border-radius: getRounded('circle');
   }
 
   &.fish__default {
-    @include setBorder("default");
-    @include bgColorMixin("default");
-    @include activeBgColor("default");
-    @include hoverBoxShadow("default");
+    @include setBorder('default');
+    @include bgColorMixin('default');
+    @include activeBgColor('default');
+    @include hoverBoxShadow('default');
 
     &.fish__plain {
       background-color: transparent;
       color: $lightBack;
 
       &:hover {
-        @include bgColorMixin("default");
+        @include bgColorMixin('default');
         color: $lightBack;
       }
 
@@ -182,22 +209,22 @@ let isCircle = computed(() => {
     }
 
     &.fish__disabled {
-      @include disabled("default");
+      @include disabled('default');
     }
   }
 
   &.fish__primary {
-    @include setBorder("primary");
-    @include bgColorMixin("primary");
-    @include activeBgColor("primary");
-    @include hoverBoxShadow("primary");
+    @include setBorder('primary');
+    @include bgColorMixin('primary');
+    @include activeBgColor('primary');
+    @include hoverBoxShadow('primary');
 
     &.fish__plain {
       background-color: transparent;
       color: $primaryColor;
 
       &:hover {
-        @include bgColorMixin("primary");
+        @include bgColorMixin('primary');
         color: $lightWhite;
       }
 
@@ -208,22 +235,22 @@ let isCircle = computed(() => {
     }
 
     &.fish__disabled {
-      @include disabled("primary");
+      @include disabled('primary');
     }
   }
 
   &.fish__danger {
-    @include setBorder("danger");
-    @include bgColorMixin("danger");
-    @include activeBgColor("danger");
-    @include hoverBoxShadow("danger");
+    @include setBorder('danger');
+    @include bgColorMixin('danger');
+    @include activeBgColor('danger');
+    @include hoverBoxShadow('danger');
 
     &.fish__plain {
       background-color: transparent;
       color: $dangerColor;
 
       &:hover {
-        @include bgColorMixin("danger");
+        @include bgColorMixin('danger');
         color: $lightWhite;
       }
 
@@ -234,22 +261,22 @@ let isCircle = computed(() => {
     }
 
     &.fish__disabled {
-      @include disabled("danger");
+      @include disabled('danger');
     }
   }
 
   &.fish__warning {
-    @include setBorder("warning");
-    @include bgColorMixin("warning");
-    @include activeBgColor("warning");
-    @include hoverBoxShadow("warning");
+    @include setBorder('warning');
+    @include bgColorMixin('warning');
+    @include activeBgColor('warning');
+    @include hoverBoxShadow('warning');
 
     &.fish__plain {
       background-color: transparent;
       color: $warningColor;
 
       &:hover {
-        @include bgColorMixin("warning");
+        @include bgColorMixin('warning');
         color: $lightWhite;
       }
 
@@ -260,7 +287,7 @@ let isCircle = computed(() => {
     }
 
     &.fish__disabled {
-      @include disabled("warning");
+      @include disabled('warning');
     }
   }
 
