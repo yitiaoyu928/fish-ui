@@ -309,7 +309,6 @@ let isCircle = computed(() => {
       flex: 1;
       font-size: $middleFontSize;
       padding: 0 5px;
-
       &.fish__default {
         color: $lightBack;
       }
