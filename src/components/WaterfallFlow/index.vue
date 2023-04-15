@@ -5,13 +5,14 @@
     ref="waterfall">
     <Item
       ref="flowItem"
-      v-for="(item, index) in state.imageList"
+      v-for="(item, index) in props.imageList"
       :style="{
         width: columnWidth + 'px',
         left: item._style && item._style.left,
         top: item._style && item._style.top,
         transition: 'all 0.5s',
         position: 'absolute',
+        visibility: state.imageShow ? 'visible' : 'hidden',
       }"
       :key="index"
       :image="item.url"></Item>
@@ -27,7 +28,7 @@ import {
 import { Debounce } from '@/utils/debounce';
 import Item from './Item/index.vue';
 interface Props {
-  column: number;
+  column?: number;
   gap?: number;
   imageList: Record<any, any>[];
 }
@@ -37,7 +38,7 @@ interface State {
   index: number;
   column: number[];
   containerStyle: Record<any, any>;
-  imageList: Record<any, any>[];
+  imageShow: boolean;
 }
 const state = reactive<State>({
   wraperWidth: 0,
@@ -47,31 +48,22 @@ const state = reactive<State>({
   containerStyle: {
     height: 0,
   },
-  imageList: [],
+  imageShow: false,
 });
 const waterfall = ref();
 const flowItem = ref();
+const parentList = ref<Element[]>([]);
 const props = withDefaults(defineProps<Props>(), {
   column: 5,
   gap: 10,
 });
-watch(
-  () => props.imageList,
-  (newV) => {
-    state.imageList = newV;
-  },
-  {
-    deep: true,
-    immediate: true,
-  }
-);
 let columnWidth = computed(() => {
+  console.log(state.wraperWidth);
   return state.wraperWidth / props.column;
 });
 const useItemPosition = () => {
-  console.log(state.imageList);
-  state.imageList.filter((item, index) => {
-    if (item.style) {
+  props.imageList.filter((item, index) => {
+    if (item._style) {
       return;
     }
     item._style = {};
@@ -89,30 +81,48 @@ const calcWaterFall = Debounce(() => {
   state.containerStyle.height = 0;
   state.columnHeight = [];
   state.column = [];
-  state.imageList.forEach((item) => {
-    delete item._style;
-  });
   for (let i = 0; i < props.column; i++) {
     state.column.push(0);
   }
-  let parent = imageAllParentElement();
-  let allImage = imageAllElement(parent);
+  props.imageList.forEach((item) => {
+    delete item._style;
+  });
+  readyRender();
+}, 500);
+const readyRender = () => {
+  state.wraperWidth = waterfall.value.clientWidth - props.column * props.gap;
+  parentList.value = imageAllParentElement();
+  let allImage = imageAllElement(parentList.value);
   imageOnComplete(allImage).then(() => {
-    parent.forEach((item) => {
+    parentList.value.forEach((item) => {
       state.columnHeight.push(item.clientHeight);
     });
-    console.log(state.columnHeight);
+    state.imageShow = true;
     useItemPosition();
   });
-}, 500);
+};
 onMounted(() => {
+  for (let i = 0; i < props.column; i++) {
+    state.column.push(0);
+  }
   window.addEventListener('resize', () => {
     state.wraperWidth = waterfall.value.clientWidth - props.column * props.gap;
     calcWaterFall();
   });
-  state.wraperWidth = waterfall.value.clientWidth - props.column * props.gap;
-  calcWaterFall();
+  readyRender();
 });
+watch(
+  () => props.imageList,
+  () => {
+    if (waterfall.value) {
+      readyRender();
+    }
+  },
+  {
+    deep: true,
+    immediate: true,
+  }
+);
 </script>
 
 <style lang="scss" scoped>
