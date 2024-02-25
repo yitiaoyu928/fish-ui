@@ -181,8 +181,8 @@ let isCircle = computed(() => {
   }
 
   &.fish__circle-rounded {
-    width: 60px;
-    height: 60px;
+    width: 32px;
+    height: 32px;
     text-align: center;
     border-radius: getRounded('circle');
   }
